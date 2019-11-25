@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Meta tags Obrigatórias -->
@@ -19,10 +20,71 @@
     <div class="container-fluid">
         <div class="jumbotron">
             <h1>Página segura</h1>
-            <div class="form-group">
-                <a class="btn btn-outline-success" href="http://localhost:9191/logout">sair com segurança</a>
-            </div>
+
+            <form th:name="fetch-clients" th:action="@{/clients}" th:attr="method='POST'">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary">App Clients</button>
+                </div>
+            </form>
         </div>
+
+        <hr>
+
+        <div th:unless="${error==null}">
+
+            <table class="table table-sm table-hover table-responsive-sm ">
+                <thead>
+                    <tr>
+                        <th scope="col">Status Code</th>
+                        <th scope="col">Error</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" th:text="${error.statusCode}"></th>
+                        <td th:text="${error.body}"></td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <div th:if="${error==null}">
+            <table th:if="${not #lists.isEmpty(clients)}" class="table table-sm table-hover table-responsive-sm ">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Redirect URI</th>
+                        <th scope="col">Scope</th>
+                        <th scope="col">Access Token Validity</th>
+                        <th scope="col">Refresh Token Validity</th>
+                        <th scope="col">Resource Ids</th>
+                        <th scope="col">Grant Types</th>
+                        <th scope="col">Authorities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c: ${clients}">
+                        <th scope="row" th:text="${c.id}"></th>
+                        <td th:text="${c.redirect}"></td>
+                        <td th:text="${c.scope}"></td>
+                        <td th:text="${c.accessTokenValidity}">Otto</td>
+                        <td th:text="${c.refreshTokenValidity}">Otto</td>
+                        <td th:text="${c.resourceIds}">Otto</td>
+                        <td th:text="${c.grantTypes}">Otto</td>
+                        <td th:text="${c.authorities}">Otto</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+
 
     </div>
 
