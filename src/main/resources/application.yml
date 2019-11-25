@@ -1,8 +1,8 @@
 security:
   oauth2:
     client:
-      client-id: mobile
-      client-secret: root
+      client-id:  ac198936-859e-4105-b308-0f6b02744fa3 #mobile
+      client-secret:  96BfDDjnbVq0Zj4C4HDKW3Bu3NL2_g5Mdigw10mX0nwFgXlxlChT5Ss4hGGtyU7NDFd2BZZF_WvoQ0JRZexTVw #root
       user-authorization-uri: http://localhost:9191/oauth/authorize
       access-token-uri: http://localhost:9191/oauth/token
     resource:
